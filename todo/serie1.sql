@@ -3,6 +3,7 @@
 
 3.3.1
 SELECT * FROM department as d
+-- Alias inutile
 
 3.3.2
 select last_name, hiring_date, superior_id, department_id, salary
@@ -39,6 +40,7 @@ where title='représentant' or title = 'président'
 select last_name, title, department_id, salary
 from employee
 where department_id=34 and title='représentant' or title='secrétaire'
+-- ATTENTION Le AND est prioritaire par rapport au OR, du coup ta réquête ne fonctionne pas. Ajouter des parenthèses
 
 select last_name,title,department_id,salary
 from employee 
@@ -66,6 +68,7 @@ select salary, last_name
 from employee
 where department_id=41
 order by salary desc
+-- C'est salaire croissant qui est demandé
 
 select title,salary,last_name
 from employee
@@ -101,6 +104,7 @@ select last_name,salary,commission_rate,(salary*commission_rate)as commission
 from employee
 where commission_rate is not null
 order by commission
+-- ORDER BY commission_rate pour trier par taux qui est  demandé par le TP.
 
 3.9
 select concat (last_name,' ',first_name) as nom_prenom

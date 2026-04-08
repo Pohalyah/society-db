@@ -1,3 +1,4 @@
+-- Bon travail, juste quelques modifs à faire
 3.1
 select d.id as department_ID, d.name as department_NAME,e.last_name as employee_LASTNAME
 from department d
@@ -9,6 +10,7 @@ from employee e
 join department d
 on e.department_id=d.id
 where d.name='distribution'
+-- Attention à la casse : préférer : WHERE LOWER(d.name) = 'distribution' ou WHERE d.name ILIKE 'distribution'  pour PostgreSQL
 
 3.2
 select e2.last_name,e2.salary, e1.last_name,e1.salary
@@ -70,6 +72,7 @@ select avg(salary)as "salaire moyen" ,sum(salary)as "somme des salaires",departm
 from employee
 group by department_id
 order by department_id
+-- La question demande le regroupement par région pas par département
 
 3.7
 select department_id, count(*)
