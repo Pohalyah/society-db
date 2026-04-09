@@ -1,0 +1,50 @@
+
+3) 2) 
+a) SELECT * FROM clients WHERE nom LIKE 'd%'
+
+b) SELECT nom,prenom FROM clients
+
+c) SELECT f.noFic,f.etat,c.nom,c.prenom FROM fiches f
+JOIN clients c
+ON f.noCli=c.noCli
+WHERE cpo LIKE '44%'
+
+d) SELECT * 
+FROM clients c
+JOIN fiches f ON c.noCli=f.noCli
+JOIN lignesfic l ON f.noFic=l.noFic
+JOIN articles a ON l.refArt=a.refArt
+JOIN grilletarifs g ON a.codeGam=g.codeGam
+JOIN tarifs t ON g.codeTarif=t.codeTarif
+WHERE f.noFic = 1006
+
+e) SELECT AVG(prixJour) AS prixMoyen,g2.libelle
+FROM tarifs t
+JOIN grilletarifs g ON t.codeTarif = g.codeTarif
+JOIN gammes g2 ON g.codeGam = g2.codeGam
+GROUP BY g2.libelle
+
+f) SELECT a.refArt,a.designation,COUNT(l.refArt)
+FROM articles a
+JOIN lignesfic l ON a.refArt=l.refArt
+GROUP BY refArt,designation
+HAVING COUNT(l.refArt)>=3
+
+g) SELECT c.libelle,g2.libelle,t.libelle,t.prixJour
+FROM grilletarifs g
+JOIN tarifs t ON g.codeTarif=t.codeTarif
+JOIN gammes g2 ON g.codeGam=g2.codeGam
+JOIN categories c ON g.codeCate=c.codeCate
+
+h) SELECT COUNT(l.noLig),l.refArt,a.designation
+FROM lignesfic l
+JOIN articles a ON l.refART=a.refArt
+JOIN grilletarifs g ON a.codeGam=g.codeGam
+JOIN categories c ON g.codeCate=c.codeCate
+WHERE c.libelle='SURF'
+GROUP BY l.refArt,a.designation
+
+i) SELECT COUNT(noLig)
+AVG(COUNT(noLig))
+FROM lignesfic
+GROUP BY noFic
